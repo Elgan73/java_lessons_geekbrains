@@ -1,6 +1,6 @@
 package Lesson;
 
-public class lesson {
+public class homework {
     public static void main(String[] args) {
         System.out.println("Hello dude!!!");
         System.out.println(plusMinus(1, 5, 2, 6));

@@ -1,14 +1,15 @@
 package Lesson.MyApp;
 
 import Lesson.MyApp.Entity.WeatherEntity;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,10 @@ public class Network {
     Constants constants = new Constants();
     private static HttpURLConnection connection;
 
-    public String bla() {
+    public void getData() {
         BufferedReader reader;
         String line;
-        StringBuffer responseContent = new StringBuffer();
+        StringBuilder responseContent = new StringBuilder();
         try {
             URL url = new URL(constants.goodRequestApi);
             connection = (HttpURLConnection) url.openConnection();
@@ -35,49 +36,53 @@ public class Network {
                 while ((line = reader.readLine()) != null) {
                     responseContent.append(line);
                 }
-                getListEntities(responseContent.toString());
                 reader.close();
             } else {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 while ((line = reader.readLine()) != null) {
                     responseContent.append(line);
-
                 }
-
                 reader.close();
+                getListEntities(responseContent.toString());
             }
-            System.out.println(responseContent.toString());
-
+            System.out.println(responseContent);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             connection.disconnect();
         }
-        return responseContent.toString();
     }
-    public List<WeatherEntity> getListEntities(String json){
-        Gson gson = new Gson();
-        WeatherEntity entity;
-        List<WeatherEntity> list = new ArrayList<>();
-        String aaa = bla();
-        JsonElement element = JsonParser.parseString(aaa);
-        Map<String, Object> map = gson.fromJson(json, Map.class);
-        for (String key : map.keySet()) {
-            entity = gson.fromJson(((JsonObject) element).get(key), WeatherEntity.class);
-            list.add(entity);
+
+//    public static String parse(String json) {
+//
+//    }
+
+    public void getListEntities(String json){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        WeatherEntity entity;
+//        List<WeatherEntity> list = new ArrayList<>();
+//        JsonElement element = JsonParser.parseString(json);
+        WeatherEntity entity = gson.fromJson(json, WeatherEntity.class);
+//        Map<String, Object> map = gson.fromJson(json, Map.class);
+//        for (String key : map.keySet()) {
+//            entity = gson.fromJson(((JsonObject) element).get(key), WeatherEntity.class);
+//            list.add(entity);
             System.out.println("Weather in this town " + entity.getName()
                     + ":\nTemp: " + entity.getMain().getTemp() + "\nWind: " + entity.getWind().getSpeed());
-        }
-        return list;
+//        }
+//        return null;
+        System.out.println(entity);
     }
 
+    public void getD() {
 
 //        getListEntities(responseContent.toString());
-//        HttpClient client = HttpClient.newHttpClient();
-//        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url.toString())).build();
-//        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-//                .thenApply(HttpResponse::body)
-//                .thenAccept(System.out::println)
-//                .join();
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.thecatapi.com/v1/images/search")).build();
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenAccept(System.out::println)
+                .join();
+    }
 
 }

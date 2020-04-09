@@ -8,7 +8,7 @@ public class Constants {
 }
 
 
-
+//http://api.openweathermap.org/data/2.5/weather?q=Ulyanovsk&appid=6a1afe2c4b4602a65b173d2c2ce4d34d&units=metric
 //{"coord":{"lon":48,"lat":54},
 // "weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03n"}],
 // "base":"stations",

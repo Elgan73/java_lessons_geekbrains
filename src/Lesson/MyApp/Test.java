@@ -19,11 +19,13 @@ public class Test {
 
 
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         Network network = new Network();
-        WeatherEntity ent = new WeatherEntity();
-        network.bla();
+//        WeatherEntity ent = new WeatherEntity();
+        network.getData();
+
+//        network.getListEntities(network.getData());
 
 //        System.out.println(ent.getMain().getTemp());
 

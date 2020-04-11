@@ -22,8 +22,9 @@ public class Test {
     public static void main(String[] args) {
 
         Network network = new Network();
-//        WeatherEntity ent = new WeatherEntity();
+        WeatherEntity ent = new WeatherEntity();
         network.getData();
+        System.out.println("!!!!! -> " + ent);
 
 //        network.getListEntities(network.getData());
 

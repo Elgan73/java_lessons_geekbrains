@@ -10,9 +10,11 @@ import java.net.URL;
 
 public class MyWeather extends JFrame {
 
+public JTextField cityInput;
+public String input;
+
     public MyWeather() {
         JButton btn;
-        JTextField cityInput;
         String button = "ТЫК!";
 
         setContentPane(new BgPanel());
@@ -20,37 +22,27 @@ public class MyWeather extends JFrame {
 
         btn = new JButton(button);
         btn.setMargin(new Insets(10, 20, 10, 20));
-        cityInput = new JTextField(15);
+        cityInput = new JTextField(20);
+
 
         cont.setLayout(new GridBagLayout());
         cont.add(cityInput);
         cont.add(btn);
 
-        btn.addActionListener(actionEvent -> {
-            MainView mainView = new MainView();
-            mainView.setBounds(400,500,500,500);
-            mainView.setVisible(true);
-        });
+            btn.addActionListener(actionEvent -> {
+                if (cityInput.getText().length() >= 3) {
+                    input = cityInput.getText();
+                    System.out.println(input);
+                    MainView mainView = new MainView();
+                    mainView.setBounds(400, 500, 500, 500);
+                    mainView.setVisible(true);
+                } else {
+                    System.out.println("insert right city");
+                }
 
-
-//        JFrame jFrame = new JFrame();
-//        JButton jBtn = new JButton(button);
-//        jBtn.setMargin(new Insets(20,40,20,40));
-//        setLayout(new FlowLayout());
-//        cityInput = new JTextField(20);
-//        cityInput.setToolTipText("Input your city");
-//        add(cityInput);
-//        add(jBtn);
-//
-//            jBtn.addActionListener(actionEvent -> {
-//                jFrame.setSize(500,500);
-//                JLabel jLabel = new JLabel(new ImageIcon(myImage));
-//                jFrame.add(jLabel);
-//                jFrame.setVisible(true);
-//            });
+            });
 
     }
-
 }
 
 class BgPanel extends JPanel {

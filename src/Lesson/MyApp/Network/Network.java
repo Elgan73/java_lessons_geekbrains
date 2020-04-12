@@ -1,26 +1,30 @@
 package Lesson.MyApp.Network;
 
-import Lesson.MyApp.Entity.Weather;
 import Lesson.MyApp.Entity.WeatherEntity;
+import Lesson.MyApp.MyView.MyWeather;
 import com.google.gson.*;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Network {
-    float tempC = 0;
 
-    String apiKey = "6a1afe2c4b4602a65b173d2c2ce4d34d";
-    String city = "Ульяновск";
-    String goodRequestApi = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric";
-
+    public float tempC;
+    public float pressure;
+    public float humidity;
+    public String name;
+    public float visibility;
     private static HttpURLConnection connection;
+
 
     public void getData() {
         BufferedReader reader;
         String line;
         StringBuilder responseContent = new StringBuilder();
+        String apiKey = "6a1afe2c4b4602a65b173d2c2ce4d34d";
+        String goodRequestApi = "http://api.openweathermap.org/data/2.5/weather?q=Ульяновск&appid=" + apiKey + "&units=metric";
         try {
             URL url = new URL(goodRequestApi);
             connection = (HttpURLConnection) url.openConnection();
@@ -42,10 +46,6 @@ public class Network {
                 }
                 reader.close();
                 getListEntities(responseContent.toString());
-
-
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,6 +57,11 @@ public class Network {
     public void getListEntities(String json){
         Gson gson = new Gson();
         WeatherEntity entity = gson.fromJson(json, WeatherEntity.class);
+        tempC = entity.getMain().getTemp();
+        visibility = entity.getVisibility();
+        humidity = entity.getMain().getHumidity();
+        pressure = entity.getMain().getPressure();
+        name = entity.getName();
     }
 
 }

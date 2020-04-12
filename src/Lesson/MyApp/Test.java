@@ -7,7 +7,6 @@ import Lesson.MyApp.Network.Network;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class Test {
     public static void main(String[] args) {
@@ -19,12 +18,6 @@ public class Test {
             myWeather.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             myWeather.setBounds(300, 200, 350, 100);
             myWeather.setVisible(true);
-            WeatherEntity entity = new WeatherEntity();
-            Network network = new Network();
-            network.getData();
-            float sss = entity.getMain().getTemp();
-            System.out.println(sss);
-
         });
     }
 }

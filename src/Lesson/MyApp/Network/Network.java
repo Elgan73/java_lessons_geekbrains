@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Network {
+    float tempC = 0;
 
     String apiKey = "6a1afe2c4b4602a65b173d2c2ce4d34d";
     String city = "Ульяновск";
@@ -41,7 +42,8 @@ public class Network {
                 }
                 reader.close();
                 getListEntities(responseContent.toString());
-                WeatherEntity entity = new WeatherEntity();
+
+
 
 
             }

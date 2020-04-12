@@ -1,40 +1,30 @@
 package Lesson.MyApp;
 
+import Lesson.MyApp.Entity.Weather;
 import Lesson.MyApp.Entity.WeatherEntity;
-import com.google.gson.*;
+import Lesson.MyApp.MyView.MyWeather;
+import Lesson.MyApp.Network.Network;
 
-import javax.swing.text.html.parser.Entity;
-import java.io.BufferedReader;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 
 public class Test {
-
-
-
     public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
 
-        Network network = new Network();
-        WeatherEntity ent = new WeatherEntity();
-        network.getData();
-        System.out.println("!!!!! -> " + ent);
+            MyWeather myWeather;
+            myWeather = new MyWeather();
+            myWeather.setTitle("OpenWeatherMap");
+            myWeather.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            myWeather.setBounds(300, 200, 350, 100);
+            myWeather.setVisible(true);
+            WeatherEntity entity = new WeatherEntity();
+            Network network = new Network();
+            network.getData();
+            float sss = entity.getMain().getTemp();
+            System.out.println(sss);
 
-//        network.getListEntities(network.getData());
-
-//        System.out.println(ent.getMain().getTemp());
-
+        });
     }
-
-
-
-
-
-
 }

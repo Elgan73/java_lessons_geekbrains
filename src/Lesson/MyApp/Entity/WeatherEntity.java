@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class WeatherEntity {
 
-    ArrayList<Object> weather = new ArrayList<>();
     Main main;
     private float visibility;
     Wind wind;
@@ -38,8 +37,7 @@ public class WeatherEntity {
     @Override
     public String toString() {
         return "WeatherEntity{" +
-                "weather=" + weather +
-                ", Main=" + main +
+                "Main=" + main +
                 ", visibility=" + visibility +
                 ", Wind=" + wind +
                 ", dt=" + dt +

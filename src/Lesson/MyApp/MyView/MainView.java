@@ -1,29 +1,46 @@
 package Lesson.MyApp.MyView;
 
-import Lesson.MyApp.Entity.WeatherEntity;
 import Lesson.MyApp.Network.Network;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainView extends JFrame {
+    Network net = new Network();
+    MyWeather myWeather = new MyWeather();
+    public MainView() {
 
-    Network network = new Network();
-    public MainView () {
-        JFrame jFrame = new JFrame();
         JLabel jLabel = new JLabel();
+        JLabel jLabel2 = new JLabel();
+        JLabel jLabel3 = new JLabel();
+        JLabel jLabel4 = new JLabel();
+        JLabel jLabel5 = new JLabel();
+        jLabel.setFont(new Font("Dialog", Font.PLAIN, 14));
+        jLabel2.setFont(new Font("Dialog", Font.PLAIN, 14));
+        jLabel3.setFont(new Font("Dialog", Font.PLAIN, 14));
+        jLabel4.setFont(new Font("Dialog", Font.PLAIN, 14));
+        jLabel5.setFont(new Font("Dialog", Font.PLAIN, 14));
         setContentPane(new BgPanel());
         Container cont = getContentPane();
-        WeatherEntity weatherEntity = new WeatherEntity();
-        network.getData();
-        setTitle(weatherEntity.getName());
-
-        cont.setSize(500,500);
+        cont.setSize(500, 200);
         cont.setLayout(new FlowLayout());
         cont.add(jLabel);
-        jLabel.setText("Говорила сегодня по скайпу с подругой из Германии");
+        cont.add(jLabel2);
+        cont.add(jLabel3);
+        cont.add(jLabel4);
+        cont.add(jLabel5);
+//        MyWeather myWeather = new MyWeather();
+//        String cityInputText = myWeather.input;
+//        System.out.println(cityInputText);
+        net.getData();
+        jLabel.setText(net.name);
+        jLabel2.setText(String.valueOf(net.tempC));
+        jLabel3.setText(String.valueOf(net.humidity));
+        jLabel4.setText(String.valueOf(net.pressure));
+
     }
 
 
 }
+
 

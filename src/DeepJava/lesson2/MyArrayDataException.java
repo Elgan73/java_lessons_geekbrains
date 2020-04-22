@@ -2,8 +2,8 @@ package DeepJava.lesson2;
 
 public class MyArrayDataException extends RuntimeException {
 
-    public MyArrayDataException(RuntimeException message) {
-        super(message);
+    public MyArrayDataException(int i, int j) {
+        super("Error in " + i + " -> " + j);
     }
 
     @Override
